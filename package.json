@@ -10,12 +10,15 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
+    "@nuxtjs/supabase": "^1.4.6",
+    "@vueuse/core": "^12.7.0",
+    "bootstrap": "^5.3.3",
     "nuxt": "^3.15.4",
     "vue": "latest",
     "vue-router": "latest"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^2.1.0",
-    "@nuxtjs/supabase": "^1.4.6"
+    "@nuxt/devtools": "^2.1.0"
   }
 }
