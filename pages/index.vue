@@ -1,11 +1,12 @@
 <template>
   <div>
-    TESTTTTTTTTTTTTTT<br><br><br><br><br><br><br><br><br>
+    <h1>Mappa con Leaflet</h1>
+    <LeafletMap />
   </div>
 </template>
 
 <script lang="ts" setup>
-
+import LeafletMap from "@/components/LeafletMap.vue";
 </script>
 
 <style>

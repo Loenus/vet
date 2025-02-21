@@ -4,10 +4,17 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   css: [
     'bootstrap/dist/css/bootstrap.css',
-    '@fortawesome/fontawesome-free/css/all.css'
+    '@fortawesome/fontawesome-free/css/all.css',
+    "leaflet/dist/leaflet.css"
   ],
   build: {
     transpile: ['bootstrap', '@fortawesome/fontawesome-free']
-  }
-  //modules: ['@nuxtjs/supabase']
+  },
+  modules: ['@nuxtjs/supabase'],
+  supabase: {
+    redirect: false // Disable automatic redirects
+  },
+  plugins: [
+    { src: "~/plugins/leaflet.client.ts", mode: "client" }
+  ],
 })
