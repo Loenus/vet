@@ -36,7 +36,7 @@ onMounted(() => {
 <style>
 .map-container {
   width: 95vw;
-  height: 70vh; /*400px*/
+  height: 75vh; /*400px*/
   margin: 2.5vw;
   border-radius: 15px;
   overflow: hidden;

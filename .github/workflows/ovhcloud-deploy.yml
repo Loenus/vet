@@ -1,0 +1,50 @@
+name: Deploy to Cloud VPS
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+jobs:
+  deploy:    
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl jq sshpass openssh-client
+
+      - name: WakeUp website
+        env:
+            VPS_WEBSITE_URL: ${{ secrets.VPS_WEBSITE_URL }}
+        run: curl --silent --insecure --location --write-out "%{http_code}" -o /dev/null ${VPS_WEBSITE_URL}
+
+      - name: Setup SSH key
+        env:
+            VPS_SSH_KEY: ${{ secrets.VPS_SSH_KEY }}
+            VPS_SSH_HOST: ${{ secrets.VPS_SSH_HOST }}
+        run: |
+          mkdir -p ~/.ssh
+          echo "${VPS_SSH_KEY}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${VPS_SSH_HOST} >> ~/.ssh/known_hosts
+
+      - name: Clone over SSH and Deploy
+        env:
+            VPS_SSH_HOST: ${{ secrets.VPS_SSH_HOST }}
+            VPS_SSH_PORT: ${{ secrets.VPS_SSH_PORT }}
+            VPS_SSH_USERNAME: ${{ secrets.VPS_SSH_USERNAME }}
+            PROJECT_NAME: ${{ secrets.PROJECT_NAME }}
+        run: |
+          ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${VPS_SSH_USERNAME}@${VPS_SSH_HOST} -p ${VPS_SSH_PORT} << 'EOF'
+            cd ${HOME}/${PROJECT_NAME} || git clone '${GITHUB_SERVER_URL}'/'${GITHUB_REPOSITORY}'.git ${HOME}/${PROJECT_NAME};
+            cd ${HOME}/${PROJECT_NAME};
+            git fetch origin;
+            git reset --hard origin/'${GITHUB_REF##*/}';
+            npm install;
+            npm run build;
+            pm2 restart ${PROJECT_NAME} || pm2 start npm --name "${PROJECT_NAME}" -- run start
+          EOF
+
+      - name: WakeUp website
+        env:
+            VPS_WEBSITE_URL: ${{ secrets.VPS_WEBSITE_URL }}
+        run: curl --silent --fail --insecure --location --write-out "%{http_code}" -o /dev/null ${VPS_WEBSITE_URL}
