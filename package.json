@@ -13,6 +13,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@nuxtjs/supabase": "^1.4.6",
+    "@popperjs/core": "^2.11.8",
     "@vueuse/core": "^12.7.0",
     "bootstrap": "^5.3.3",
     "leaflet": "^1.9.4",

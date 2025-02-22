@@ -17,4 +17,14 @@ export default defineNuxtConfig({
   plugins: [
     { src: "~/plugins/leaflet.client.ts", mode: "client" }
   ],
+  app: {
+    head: {
+      script: [
+        {
+          src: '/js/bootstrap.bundle.min.js',
+          tagPosition: 'bodyClose'
+        }
+      ]
+    }
+  }
 })

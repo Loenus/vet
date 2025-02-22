@@ -5,8 +5,8 @@
         <div class="row">
           <div class="col-12">
             <nav class="navbar navbar-expand-md navbar-light">
-              <a class="navbar-brand" href="https://front.codes/" target="_blank">
-                <img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+              <a class="navbar-brand" href="#" target="_blank">
+                AR
               </a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -77,8 +77,8 @@
       </div>
     </div>
     <div class="my-5 py-5"></div>
-    <a href="https://front.codes/" class="logo" target="_blank">
-      <img src="https://assets.codepen.io/1462889/fcy.png" alt="">
+    <a href="https://www.arcaplanet.it/" class="logo" target="_blank">
+      AR
     </a>
   </div>
 </template>

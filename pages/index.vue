@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Mappa con Leaflet</h1>
+    <h1>Mappa con Negozi</h1>
     <LeafletMap />
   </div>
 </template>
