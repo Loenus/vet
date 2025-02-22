@@ -19,7 +19,20 @@ jobs:
           source: "."
           target: "${{ secrets.VPS_PROJECT_PATH }}"
 
-      - name: Executing remote command
+      - name: Create .env file on VPS
+        uses: appleboy/ssh-action@master #Executing remote command
+        with:
+          host: ${{ secrets.VPS_SSH_HOST }}
+          username: ${{ secrets.VPS_SSH_USERNAME }}
+          port: ${{ secrets.VPS_SSH_PORT }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            echo "NODE_ENV=production" > ${{ secrets.VPS_PROJECT_PATH }}/.env
+            echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> ${{ secrets.VPS_PROJECT_PATH }}/.env
+            echo "SUPABASE_KEY=${{ secrets.SUPABASE_KEY }}" >> ${{ secrets.VPS_PROJECT_PATH }}/.env
+            # TODO altri secrets qui
+  
+      - name: Start server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.VPS_SSH_HOST }}
